@@ -1,0 +1,48 @@
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+    {% include './sidebar-brand.html' %}
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    {% include './sidebar-dashboard.html' %}
+    <h3 class="ml-3" style="color:white; font-size: medium; " ><b>{{ request.dia_atual }}</b></h3>
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+      Opções
+    </div>
+      {% include './sidebar-item-artigo.html' %}
+    <!-- Nav Item - Pages Collapse Menu -->
+    
+      
+    
+      <!-- Nav Item - Utilities Collapse Menu -->
+      {% include './sidebar-item-collapse-redatores.html' %}
+      {% include './sidebar-item-collapse-gerente.html' %}
+      {% include './sidebar-item-collapse-tema.html' %}
+      
+
+    <!-- Nav Item - Utilities Collapse Menu -->
+    
+   
+    <!-- Divider -->
+      <hr class="sidebar-divider">
+      {% include './sidebar-item-collapse-mensagens.html' %}
+      <!-- Heading -->
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
+
+      {% include './sidebar-sugestao-form.html' %}
+    
+    <hr class="sidebar-divider d-none d-md-block">
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+      <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+  </ul>

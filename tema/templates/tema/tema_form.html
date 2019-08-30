@@ -1,0 +1,27 @@
+
+{% extends "dashboard/base.html" %}
+{% load static %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{% bootstrap_messages %}
+{% block title %} - Gerentes Lista 
+{% endblock %}
+
+{% block main %}
+
+    <a href="/dashboard/temas/">Voltar</a>
+
+    <form method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <!-- <input type="hidden" value="{{canil.pk}}" name="canil" id="id_canil"> -->
+            <input type="submit" value="Criar">
+        </form>
+
+  
+{% endblock %}
+
+
+

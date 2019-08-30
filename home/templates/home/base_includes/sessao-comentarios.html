@@ -1,0 +1,12 @@
+<hr>
+{% if object.comentario_set.all %}
+<div class="col-lg-5 col-md-10 mx-auto">
+  <h3>Comentários</h3> 
+  <ul>
+    {% for comentario in object.comentario_set.all %}
+        <li><a href="{% url 'del_coment' comentario.pk %}">{{ comentario.leitor }}</a>
+              - {{ comentario }} - {{ comentario.data_criacao }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}    
+</div>

@@ -1,0 +1,31 @@
+
+{% extends "dashboard/base.html" %}
+{% load static %}
+{% block title %} - Gerentes Lista 
+{% endblock %}
+
+{% block main %}
+
+        <a href="/dashboard/redatores/">Voltar</a>
+
+        <h1>{{ object.nome_completo }}</h1>
+        <h3>{{ object.facebook }}</h3>
+        <p>{{ object.logo }}</p>
+
+        {{ object.pais }}
+        {{ object.estado }}
+        {{ object.cidade }}
+        {{ object.descricao }}
+
+        <br>
+        Total de artigos: {{ object.all_artigos }}<br>
+        Artigos aceitos: {{ object.aceitos_artigos }}<br>
+        Artigos pendentes: {{ object.negados_artigos }}<br>
+
+        <a href="{% url 'ban_redator' object.pk %}">Banir/Liberar</a>
+
+  
+{% endblock %}
+
+
+

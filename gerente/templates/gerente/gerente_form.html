@@ -1,0 +1,41 @@
+
+
+{% extends "dashboard/base.html" %}
+{% load static %}
+{% block title %} - Gerentes Lista 
+{% endblock %}
+
+{% block main %}
+
+   
+
+<a href="{% url 'dashboard' %}">Dashboard</a><br>
+<a href="{% url 'lista_gerentes' %}">Voltar</a>
+<hr>
+<form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="">Nome
+                {{ form.username }}
+            </label>
+
+        </div>
+        <div class="form-group">
+            <label for="">Email
+                {{ form.email }}
+            </label>
+
+        </div>
+        <div class="form-group">
+            <label for="">
+                Senha
+                <input type="password" name="password">
+            </label>
+
+        </div>
+        <!-- <input type="hidden" value="{{canil.pk}}" name="canil" id="id_canil"> -->
+        <input type="submit" value="Criar">
+    </form>
+   
+    
+{% endblock %}

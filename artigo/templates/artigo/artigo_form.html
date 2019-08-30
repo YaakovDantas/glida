@@ -1,0 +1,9 @@
+
+
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <!-- <input type="hidden" value="{{canil.pk}}" name="canil" id="id_canil"> -->
+    <input type="submit" value="Salvar">
+</form>

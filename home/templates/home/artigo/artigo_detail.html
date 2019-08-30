@@ -1,0 +1,24 @@
+<a href="/">Voltar</a>
+
+        <h1>{{ object.titulo }}</h1>
+        <h3>Criado por: {{ object.redator.nome_completo }}</h3>
+        <p>{{ object.tema }}</p>
+        
+        <textarea name="" disabled id="" cols="30" rows="10">
+            {{ object.texto }}
+        </textarea>
+
+        <ul>
+            {% for comentario in object.comentario_set.all %}
+                <li><a href="{% url 'del_coment' comentario.pk %}">{{ comentario.leitor }}</a>
+                     - {{ comentario }} - {{ comentario.data_criacao }}</li>
+            {% endfor %}
+        </ul>
+
+        {% if user.username != '' %}
+        <form action="{% url 'com' object.pk %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Comentar</button>
+        </form>
+        {% endif %}

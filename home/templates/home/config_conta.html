@@ -1,0 +1,31 @@
+{% extends './base.html' %}
+{% load static %}
+{% block title %}
+Configurações da Conta
+{% endblock%}
+
+
+{% block main %}
+
+{% include "./base_includes/header.html" with titulo='<br><br><br>Perfil e Controle da conta' %}
+  
+<div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-10 mx-auto">
+          <ul>
+              <li>
+                  <a href="{% url 'update_redator' request.user_logado.pk %}">Alterar Dados</a>
+
+              </li>
+              <li>
+                  <a href="{% url 'lista_artigos_user' %}">Ver meus artigos</a>
+
+              </li>
+          </ul>
+            
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

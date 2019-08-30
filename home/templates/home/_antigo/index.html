@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    {% if user.username != '' %}
+        
+        <a href="{% url 'logout_brejo' %}">Logout</a>
+        <br>
+        <a href="{% url 'art_create' %}">Criar artigo</a>
+        <br>
+        <h3>Bem vindo! {{ user.username }}</h3>
+    {% else %}
+        <a href="{% url 'registro' %}">Ser um redator</a>
+        <br>
+        <a href="{% url 'login' %}">Login</a>
+        <br>
+    {% endif %}
+    Bem vindo ao brejo livre
+    <hr>
+    {% for tema in temas %}
+        <a href="{% url 'home_tema' tema.pk %}">{{tema}}  |</a>
+    {% endfor %}
+    <hr>
+    <form action="">
+        
+        {{ form_busca.as_p }}
+        <button>buscar</button>
+    </form>
+    <hr>
+    {% for artigo in artigos %}
+        <a href="{% url 'home_art_det' artigo.pk %}">
+            <h3>titulo: {{artigo}}</h3>
+
+        </a>
+        <textarea name="" id="" cols="30" rows="10">{{ artigo.texto }}</textarea>
+    {% endfor %}
+</body>
+</html>

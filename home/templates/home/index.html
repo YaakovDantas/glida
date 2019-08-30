@@ -1,0 +1,13 @@
+{% extends './base.html' %}
+{% load static %}
+{% block title %}
+  Home
+{% endblock %}
+  <!-- Main Content -->
+  {% block main %}
+    {% include "./base_includes/header.html" with titulo='' %}
+    {% include "./base_includes/buscar.html" %}
+    {% include "./base_includes/index-content.html"  %}
+  {% endblock %}
+
+ 

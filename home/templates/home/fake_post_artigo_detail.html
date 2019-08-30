@@ -1,0 +1,18 @@
+{% extends './base.html' %}
+{% load static %}
+{% block title %}
+ArtigoFake
+{% endblock%}
+
+
+{% block main %}
+{% include "./base_includes/header.html" with titulo="Visualização-TESTE" sub=object.titulo %}
+
+  
+
+<!-- Post Content -->
+
+{% include "./base_includes/post-content.html" %}
+
+
+{% endblock %}

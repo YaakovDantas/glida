@@ -1,0 +1,23 @@
+{% extends "dashboard/base.html" %}
+{% load bootstrap4 %}
+{% block title %}
+ -  Enviar Sugestão
+{% endblock %}
+
+{% block main %}
+    <a href="{% url 'dashboard' %}">Voltar Dashboard</a>
+    <br>
+    <h1>Envie a sua mensagem para os desenvolvedores!</h1>
+    <h3>Estaremos mais que felizes em receber seu feedback construtivo ou negativo.</h3>
+    <h4>Iremos responder o mais rápido possível.</h4>
+    <hr>
+    <form method="post"  >
+        {% csrf_token %}
+        {% bootstrap_form form   %}
+        <input type="submit" value="Enviar sugestão">
+    </form>
+  
+
+{% endblock %}
+
+

@@ -1,0 +1,21 @@
+{% extends './base.html' %}
+{% load static %}
+{% block title %}
+Artigo
+{% endblock%}
+
+
+{% block main %}
+{% include "./base_includes/header.html" with titulo=object.titulo sub=object.tema %}
+
+  
+
+<!-- Post Content -->
+
+{% include "./base_includes/post-content.html" %}
+
+{% include "./base_includes/sessao-comentarios.html" %}
+
+{% include "./base_includes/enviar-comentario.html" %}
+
+{% endblock %}

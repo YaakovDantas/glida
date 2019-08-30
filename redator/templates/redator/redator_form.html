@@ -1,0 +1,27 @@
+{% extends "dashboard/base.html" %}
+{% load static %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{% bootstrap_messages %}
+
+{% block title %} - Criar Redator 
+{% endblock %}
+
+{% block main %}
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <!-- <input type="hidden" value="{{canil.pk}}" name="canil" id="id_canil"> -->
+        <input type="submit" value="Salvar">
+    </form>
+
+    
+{% endblock %}
+
+
+
+
+

@@ -1,0 +1,29 @@
+{% extends './base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block title %}
+  Home
+{% endblock %}
+  <!-- Main Content -->
+  {% block main %}
+    {% include "./base_includes/header.html" with titulo='<br><br><br>Perfil' %}
+    
+    <div class="container">
+            <div class="row">
+            <div class="col-lg-12 col-md-10 mx-auto">
+                {% bootstrap_messages %}
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    {% buttons %}
+                        <button type="submit" class="btn btn-primary">
+                        Enviar
+                        </button>
+                    {% endbuttons %}
+                </form>
+            </div>
+            </div>
+        </div>
+  {% endblock %}
+
+ 

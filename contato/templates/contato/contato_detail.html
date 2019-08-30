@@ -1,0 +1,43 @@
+
+{% extends "dashboard/base.html" %}
+{% load static %}
+{% block title %} - Mensagem
+{% endblock %}
+
+{% block main %}
+    <h2>Lista de Contatos</h2>
+    <a href="/dashboard/contatos/">Voltar</a>
+
+    <h1>{{ object.nome }}</h1>
+    <h3>Assunto: {{ object.assunto }}</h3>
+    <p>{{ object.email }}</p>
+
+   <article>
+       {{ object.mensagem }}
+   </article>
+   
+    <a href="{% url 'alter_contato' object.pk %}">Marcar como lido</a>
+        
+        
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,49 @@
+
+{% extends "dashboard/base.html" %}
+{% load static %}
+{% block title %} - Gerentes Lista 
+{% endblock %}
+
+{% block main %}
+
+<a href="{% url 'dashboard' %}">Dashboard</a>
+<h3>Lista de redatores</h3>
+    {% if object_list %}
+      <table class="table table-striped table-hover">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Ativo</th>
+              <th scope="col">Atualizar</th>
+              <th scope="col">Banir/Liberar</th>
+              <th scope="col">Deletar</th>
+            </tr>
+          </thead>
+          <tbody>
+              {% for redator in object_list %}
+              <tr>
+                  <th scope="row"> {{ forloop.counter }} </th>
+                  <td><a href="{% url 'redator' redator.pk %}">{{ redator.nome_completo }}</a></td>
+                  <td>{{ redator.ativo|yesno:'Sim,Não' }}</td>
+                  <td><a href="{% url 'att_redator' redator.pk %}">Atualizar</a></td>
+                  <td><a href="{% url 'ban_redator' redator.pk %}">X</a></td>
+                  <td><a href="{% url 'del_redator' redator.pk %}">Deletar</a></td>
+              </tr>
+              {% endfor %}
+            
+            
+          </tbody>
+        </table>
+        {% else %}
+          <h3>Sem redatores cadastrados.</h3>
+        {% endif %}
+  
+{% endblock %}
+
+
+
+
+
+
+

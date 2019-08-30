@@ -1,0 +1,51 @@
+{% extends "dashboard/base.html" %}
+{% load static %}
+{% block title %} - Dashboard 
+{% endblock %}
+
+{% block main %}
+
+    <div class="row">
+
+        
+        <div id='valores' tema_por_viss="{{ temas_viss }}"  view_por_mes="{{ viss_por_mes }}" artigos_espera="{{ artigos_estado }}"  ></div>
+        
+        {% include "base_includes/card-top-1.html" with titulo='Visualizações do Dia' content=dia_viss.data__count color="primary" icon="eye" %}
+        {% include "base_includes/card-top-1.html" with titulo="Artigo mais lido do dia: "|add:artigo_mais_lido_dia.artigo__titulo  content=artigo_mais_lido_dia.artigo__count   color="info" icon="calendar-day" %}
+        {% include "base_includes/card-top-1.html" with titulo='Visualizações do Mês' content=mensal_viss.data__count color="success" icon="eye" %}
+        {% include "base_includes/card-top-1.html" with titulo="Artigo mais lido do mês: "|add:artigo_mais_lido_mes.artigo__titulo content=artigo_mais_lido_mes.artigo__count color="warning" icon="calendar-alt" %}
+        
+        {% include "base_includes/card-top-1.html" with titulo='Total  de artigos' content=artigos_total color="warning" icon="newspaper" %}
+        {% include "base_includes/card-top-1.html" with titulo='Total de comentarios' content=comentarios_total color="success" icon="comments" %}
+        {% include "base_includes/card-top-1.html" with titulo="Total de redatores " content=redatores_total   color="info" icon="user-edit" %}
+        {% include "base_includes/card-top-1.html" with titulo="Número de mensagems " content=mensagens_total color="primary" icon="paper-plane" %}
+
+    </div>
+    <hr>
+    <!-- graficos -->
+    {% include "base_includes/content-row-2.html"  %}
+    {% include "base_includes/content-row-1.html"  %}
+   
+    
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'js/demo/chart-view-mes.js' %}"></script>
+<script src="{% static 'js/demo/chart-tema-view.js' %}"></script>
+<script src="{% static 'js/demo/chart-artigo-estado.js' %}"></script>
+
+<script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+
+<script src="{% static 'js/demo/datatables-demo.js' %}"></script>
+<script src="{% static 'js/palette.js' %}"></script>
+
+<script type="text/javascript">
+    var temas_viss = JSON.parse(document.getElementById('valores').getAttribute('tema_por_viss'));
+    var view_por_mes = JSON.parse(document.getElementById('valores').getAttribute('view_por_mes'));
+    var artigo_espera = JSON.parse(document.getElementById('valores').getAttribute('artigos_espera'));
+    criarGrafioTemasPorView(temas_viss)
+    criarGraficoArtigoEstado(artigo_espera)
+    criarGraficoViewPorMes(view_por_mes)
+</script>
+{% endblock %}

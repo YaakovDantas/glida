@@ -1,0 +1,25 @@
+
+{% extends "dashboard/base.html" %}
+{% load static %}
+{% block title %} - Gerentes Lista 
+{% endblock %}
+
+{% block main %}
+
+        
+
+<a href="{% url 'dashboard' %}">Dashboard</a><br>
+<a href="{% url 'create_gerente' %}">Criar novo Gerente</a>
+<a href="/dashboard/gerentes/">Voltar</a>
+
+<h1>{{ object.nome }}</h1>
+<h3>Email: {{ object.email }}</h3>
+
+<a href="{% url 'ban_gerente' object.pk %}">Banir/Liberar</a>
+
+        
+        
+{% endblock %}
+
+
+

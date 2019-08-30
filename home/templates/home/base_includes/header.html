@@ -1,0 +1,23 @@
+<header class="masthead" style="background-image: url('/media/fotos/Capa.jpg');height:700px;" >
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>{{ titulo }}</h1>
+            <span class="subheading">{{ sub }}</span>
+            <br>
+            <br>
+            <br>
+            <br><br>
+            <br>
+            <br>
+            {% if object %}
+              <h4>{{ object.redator }}</h4>
+              <h5>{{ object.data_criacao }}</h5>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>

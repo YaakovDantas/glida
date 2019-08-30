@@ -1,0 +1,18 @@
+{% extends './base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block title %}
+  Criar Artigo
+{% endblock %}
+  <!-- Main Content -->
+  {% block main %}
+    {% include "./base_includes/header.html" with titulo='' %}
+
+    {% bootstrap_messages %}
+
+    {% include "./base_includes/criar-artigo.html" %}
+      
+    {% include "./base_includes/index-content.html"  %}
+  {% endblock %}
+
+ 

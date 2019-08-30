@@ -1,0 +1,14 @@
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#gerentes" aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-user-tie"></i>
+      <span>Gerentes</span>
+    </a>
+    <div id="gerentes" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <h6 class="collapse-header">Ações</h6>
+        <a class="collapse-item" href="{% url 'lista_gerentes' %}">Ver Gerentes</a>
+        <a class="collapse-item" href="{% url 'create_gerente' %}">Cadastrar Gerente</a>
+        
+      </div>
+    </div>
+  </li>
