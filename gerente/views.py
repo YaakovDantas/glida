@@ -12,14 +12,14 @@ from django.contrib.auth.models import User
 # Create your views here.
 
 
-class GerentesList(ListView):
+class GerentesList(LoginRequiredMixin,ListView):
     login_url = '/login/' 
     paginate_by = 12
     template_name = 'gerente/gerente_list.html'
 
     def get_queryset(self):
         gerentes = Gerente.objects.values('pk')
-        usuarios = User.objects.filter(gerente__pk__in=gerentes)
+        usuarios = User.objects.filter(gerente__pk__in=gerentes).order_by('pk')
         return usuarios
         # return User.gerente.get_queryset()
         # return User.objects.all()
@@ -28,7 +28,7 @@ class GerentesList(ListView):
         context = super(GerentesList, self).get_context_data(**kwargs)
         return context
 
-class GerenteDetail(DetailView):
+class GerenteDetail(LoginRequiredMixin,DetailView):
     login_url = '/login/'
     model = Gerente
     template_name = 'gerente/gerente_detail.html'
@@ -39,7 +39,7 @@ class GerenteDetail(DetailView):
         return context
 
 
-class GerenteUpdate(UpdateView):
+class GerenteUpdate(LoginRequiredMixin,UpdateView):
     login_url = '/login/' 
     model = User
     fields = ["username","password","email"]
@@ -54,7 +54,7 @@ class GerenteUpdate(UpdateView):
         return context
 
 
-class GerenteCreate(CreateView):
+class GerenteCreate(LoginRequiredMixin,CreateView):
     model = User
     #form_class = UserForm
     success_url ="/dashboard/gerentes/"
@@ -74,7 +74,7 @@ class GerenteCreate(CreateView):
         return super(GerenteCreate, self).form_valid(form)
 
 
-class GerenteChange(RedirectView):
+class GerenteChange(LoginRequiredMixin,RedirectView):
     permanent = False
     query_string = False
     pattern_name = 'gerente'
@@ -88,7 +88,7 @@ class GerenteChange(RedirectView):
         return self.get_success_url()
 
 
-class GerenteDelete(DeleteView):
+class GerenteDelete(LoginRequiredMixin,DeleteView):
     login_url = '/login/' 
     model = Gerente
     template_name = 'gerente/gerente_delete.html'

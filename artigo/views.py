@@ -11,8 +11,8 @@ from django.contrib.auth.models import User
 
 # Create your views here.
 
-class ArtigoDetail( DetailView):
-    login_url = '/login/'
+class ArtigoDetail(LoginRequiredMixin,  DetailView):
+    login_url = '/login' 
     model = Artigo
     template_name = 'artigo/artigo_detail.html'
 
@@ -21,26 +21,27 @@ class ArtigoDetail( DetailView):
         context = super(ArtigoDetail, self).get_context_data(**kwargs)
         return context
 
-class ArtigoList( ListView):
-    login_url = '/login/' 
+class ArtigoList( LoginRequiredMixin, ListView):
+    login_url = '/login' 
     paginate_by = 12
     template_name = 'artigo/artigo_list.html'
 
     def get_queryset(self):
-        return Artigo.objects.all()
+        return Artigo.objects.all().order_by('pk')
     
     def get_context_data(self, **kwargs):
         context = super(ArtigoList, self).get_context_data(**kwargs)
         return context
     
-class ArtigoDelete( DeleteView):
-    login_url = '/login/' 
+class ArtigoDelete(LoginRequiredMixin,  DeleteView):
+    login_url = '/login' 
     model = Artigo
     template_name = 'artigo/artigo_delete.html'
     success_url = '/dashboard/artigos/'
 
 
-class ArtigoChange( RedirectView):
+class ArtigoChange( LoginRequiredMixin, RedirectView):
+    login_url = '/login' 
     permanent = False
     query_string = False
     pattern_name = 'artigo'

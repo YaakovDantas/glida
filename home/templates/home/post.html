@@ -6,16 +6,16 @@ Artigo
 
 
 {% block main %}
-{% include "./base_includes/header.html" with titulo=object.titulo sub=object.tema %}
+    {% include "./base_includes/header.html" with titulo=object.titulo sub=object.tema %}
 
-  
+    
 
-<!-- Post Content -->
+    <!-- Post Content -->
 
-{% include "./base_includes/post-content.html" %}
+    {% include "./base_includes/post-content.html" %}
 
-{% include "./base_includes/sessao-comentarios.html" %}
-
-{% include "./base_includes/enviar-comentario.html" %}
-
+    {% include "./base_includes/sessao-comentarios.html" %}
+    {% if request.user_logado %}
+        {% include "./base_includes/enviar-comentario.html" %}
+    {% endif %}
 {% endblock %}

@@ -12,7 +12,12 @@
           <div class="col-lg-12 col-md-10 mx-auto">
             <form method="post">
                 {% csrf_token %}
-                {% bootstrap_form form %}
+                {% bootstrap_field form.username  %}
+                {% bootstrap_field form.email %}
+                <div class="form-group">
+                  <label for="id_password">Senha</label>
+                  <input type="password" name="password" class="form-control" placeholder="Sua senha" title="" id="id_password">
+                </div>
                 {% buttons %}
                     <button type="submit" class="btn btn-primary">
                     Criar

@@ -11,20 +11,20 @@ from django.contrib.auth.models import User
 # Create your views here.
 
 
-class TemasList(ListView):
+class TemasList(LoginRequiredMixin,ListView):
     login_url = '/login/' 
     paginate_by = 12
     template_name = 'tema/tema_list.html'
 
     def get_queryset(self):
-        return Tema.objects.all()
+        return Tema.objects.all().order_by('pk')
     
     def get_context_data(self, **kwargs):
         context = super(TemasList, self).get_context_data(**kwargs)
         return context
 
 
-class TemaDetail(DetailView):
+class TemaDetail(LoginRequiredMixin,DetailView):
     login_url = '/login/'
     model = Tema
     template_name = 'tema/tema_detail.html'
@@ -35,7 +35,7 @@ class TemaDetail(DetailView):
         return context
 
 
-class TemaCreate(CreateView):
+class TemaCreate(LoginRequiredMixin,CreateView):
     model = Tema
     #form_class = UserForm
     success_url ="/dashboard/temas/"
@@ -44,7 +44,7 @@ class TemaCreate(CreateView):
     fields=['nome']	#
        
 
-class TemaUpdate(UpdateView):
+class TemaUpdate(LoginRequiredMixin,UpdateView):
     model = Tema
     #form_class = UserForm
     success_url ="/dashboard/temas/"
@@ -53,7 +53,7 @@ class TemaUpdate(UpdateView):
     fields=['nome']	#
 
 
-class TemaDelete(DeleteView):
+class TemaDelete(LoginRequiredMixin,DeleteView):
     login_url = '/login/' 
     model = Tema
     template_name = 'tema/tema_delete.html'

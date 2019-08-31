@@ -14,19 +14,19 @@ from .forms import ComentarioForm, BuscaForm
 # Create your views here.
 
 class HomeListView(ListView):
-	login_url = '/login/' 
+	login_url = '/login' 
 	paginate_by = 5
 	template_name = "home/index.html"
 
 	def get_queryset(self):
 		if 'busca' in self.request.GET:
 			query = self.request.GET['busca']
-			artigos = Artigo.objects.filter(ativo=True, titulo__contains = query )
+			artigos = Artigo.objects.filter(ativo=True, titulo__contains = query ).order_by('-pk')
 		elif 'pk' in self.kwargs:
 			tema_pk = self.kwargs['pk']
-			artigos = Artigo.objects.filter(ativo=True, tema=tema_pk)
+			artigos = Artigo.objects.filter(ativo=True, tema=tema_pk).order_by('-pk')
 		else:
-			artigos = Artigo.objects.filter(ativo=True)
+			artigos = Artigo.objects.filter(ativo=True).order_by('-pk')
 		return artigos
 
 	def get_context_data(self, **kwargs):
@@ -43,7 +43,7 @@ class RedatorCreate(CreateView):
 	# model = Redator
 	model = User
 	#form_class = UserForm
-	success_url ="/"
+	success_url ="/login"
 	# success_url ="/login"
 	template_name = 'home/registro_form.html'
 	fields=['username','email','password']	#
@@ -105,8 +105,9 @@ class LogoutView(View):
 		logout(request)	
 		return redirect('login')
 
-class ArtigoCreate(CreateView):
-	login_url = '/login/'
+class ArtigoCreate(LoginRequiredMixin, CreateView):
+	print("teste")
+	login_url = '/login'
 	model = Artigo
 	template_name = 'home/create_artigo.html'
 	fields = ['titulo', 'tema', 'texto', ]
@@ -124,7 +125,7 @@ class ArtigoCreate(CreateView):
 		return context
 
 class ArtigoDetail( DetailView):
-	login_url = '/login/'
+	login_url = 'login/'
 	model = Artigo
 	template_name = 'home/post.html'
 
@@ -142,8 +143,8 @@ class ArtigoDetail( DetailView):
 		context['user_logado'] =  self.request.user if self.request.user.is_active  else False
 		return context
 
-class ComentarioCreate(CreateView):
-	login_url = '/login/'
+class ComentarioCreate(LoginRequiredMixin, CreateView):
+	login_url = 'login/'
 	model = Comentario
 	# form_class = ComentarioForm
 	template_name = 'home/artigo/comentario_form.html'
@@ -173,7 +174,7 @@ class SobreView(View):
 		
 		return render(request, "home/about.html",context)
 
-class ConfiguracaoView(View):
+class ConfiguracaoView(LoginRequiredMixin, View):
 	
 
 	def get(self, request, *args,  **kwargs):
@@ -183,7 +184,7 @@ class ConfiguracaoView(View):
 		
 		return render(request, "home/config_conta.html",context)
 
-class RedatorUpdate(UpdateView):
+class RedatorUpdate(LoginRequiredMixin, UpdateView):
 	model = Redator
 	fields = ['nome_completo','data_criacao','facebook','twitter','github','instagram','logo','pais','estado','cidade','descricao','telefone']
 	template_name = "home/redator_form.html"
@@ -194,13 +195,13 @@ class RedatorUpdate(UpdateView):
 		context['user_logado'] =  self.request.user if self.request.user.is_active  else False
 		return context
 
-class ArtigoConfigList(ListView):
-	login_url = '/login/' 
+class ArtigoConfigList(LoginRequiredMixin, ListView):
+	login_url = 'login/' 
 	paginate_by = 5
 	template_name = "home/user-artigos_list.html"
 
 	def get_queryset(self):
-		artigos = Artigo.objects.filter(redator=self.request.user.usuario.pk)
+		artigos = Artigo.objects.filter(redator=self.request.user.usuario.pk).order_by('pk')
 		return artigos
 
 	def get_context_data(self, **kwargs):
@@ -210,14 +211,14 @@ class ArtigoConfigList(ListView):
 		
 		return context
 
-class ArtigoConfigUpdate(UpdateView):
-	login_url = '/login/'
+class ArtigoConfigUpdate(LoginRequiredMixin, UpdateView):
+	login_url = 'login/'
 	model = Artigo
 	template_name = 'home/create_artigo.html'
 	fields = ['titulo', 'tema', 'texto', ]
 	success_url = '/'
 
-class ArtigoConfigDetail(DetailView):
+class ArtigoConfigDetail(LoginRequiredMixin, DetailView):
 	template_name = "home/fake_post_artigo_detail.html"
-	login_url = '/login/'
+	login_url = 'login/'
 	model = Artigo

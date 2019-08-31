@@ -11,19 +11,19 @@ from django.contrib.auth.models import User
 
 # Create your views here.
 
-class ContatosList(ListView):
+class ContatosList(LoginRequiredMixin, ListView):
     login_url = '/login/' 
     paginate_by = 12
     template_name = 'contato/contato_list.html'
 
     def get_queryset(self):
-        return Contato.objects.all()
+        return Contato.objects.all().order_by('pk')
     
     def get_context_data(self, **kwargs):
         context = super(ContatosList, self).get_context_data(**kwargs)
         return context
 
-class ContatoDetail(DeleteView):
+class ContatoDetail(LoginRequiredMixin, DeleteView):
     login_url = '/login/'
     model = Contato
     template_name = 'contato/contato_detail.html'
@@ -32,7 +32,7 @@ class ContatoDetail(DeleteView):
         context = super(ContatoDetail, self).get_context_data(**kwargs)
         return context
 
-class ContatoChange(RedirectView):
+class ContatoChange(LoginRequiredMixin, RedirectView):
     permanent = False
     query_string = False
     pattern_name = 'contato'
@@ -45,7 +45,7 @@ class ContatoChange(RedirectView):
         artigo.toggle_ativo()
         return self.get_success_url()
 
-class ContatoDelete(DeleteView):
+class ContatoDelete(LoginRequiredMixin, DeleteView):
     login_url = '/login/' 
     model = Contato
     template_name = 'contato/contato_delete.html'

@@ -9,19 +9,19 @@ from home.models import Gerente, Redator, Artigo, Comentario, Tema
 from django.contrib.auth.models import User
 # Create your views here.
 
-class RedatoresList(ListView):
+class RedatoresList(LoginRequiredMixin,ListView):
     login_url = '/login/' 
     paginate_by = 12
     template_name = 'redator/redator_list.html'
 
     def get_queryset(self):
-        return Redator.objects.all()
+        return Redator.objects.all().order_by('pk')
     
     def get_context_data(self, **kwargs):
         context = super(RedatoresList, self).get_context_data(**kwargs)
         return context
 
-class RedatorDetail(DetailView):
+class RedatorDetail(LoginRequiredMixin,DetailView):
     login_url = '/login/'
     model = Redator
     template_name = 'redator/redator_detail.html'
@@ -32,7 +32,7 @@ class RedatorDetail(DetailView):
         return context
 
 
-class RedatorUpdate(UpdateView):
+class RedatorUpdate(LoginRequiredMixin,UpdateView):
     login_url = '/login/' 
     model = Redator
     fields = ["nome_completo","data_criacao","facebook","twitter","github","instagram","logo","pais","estado","cidade","descricao","telefone"]
@@ -43,7 +43,7 @@ class RedatorUpdate(UpdateView):
         context = super(RedatorUpdate, self).get_context_data(**kwargs)
         return context
 
-class RedatorChange(RedirectView):
+class RedatorChange(LoginRequiredMixin,RedirectView):
     permanent = False
     query_string = False
     pattern_name = 'redator'
@@ -56,7 +56,7 @@ class RedatorChange(RedirectView):
         artigo.toggle_ativo()
         return self.get_success_url()
 
-class RedatorDelete(DeleteView):
+class RedatorDelete(LoginRequiredMixin,DeleteView):
     login_url = '/login/' 
     model = Redator
     template_name = 'redator/redator_delete.html'

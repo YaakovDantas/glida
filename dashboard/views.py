@@ -18,7 +18,7 @@ import datetime, json
 MONTHS =  {1:'Jan',  2:'Fev',  3:'Mar',  4:'Abr',   5:'Mai',   6:'Jun',
            7:'Jul', 8:'Ago', 9:'Set', 10:'Out', 11:'Nov', 12:'Dez'}
 
-class DashboardView(View):
+class DashboardView(LoginRequiredMixin,View):
 
 	def get(self, request, *args,  **kwargs):
 		
@@ -139,7 +139,7 @@ class DashboardLogoutView(View):
 
 
 
-class ComentarioDelete( DeleteView):
+class ComentarioDelete( LoginRequiredMixin,DeleteView):
     login_url = '/login/' 
     model = Comentario
     template_name = 'dashboard/comentario/comentario_delete.html'

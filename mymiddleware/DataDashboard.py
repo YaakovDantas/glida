@@ -42,12 +42,11 @@ class DataDashboard(object):
                 pass
 
         else:
-            try:
-                
+            temas = Tema.objects.all()
+            request.temas = temas
+            try:    
                 user = request.user.usuario if request.user.is_active  else False
-                temas = Tema.objects.all()
                 request.user_logado = user
-                request.temas = temas
             except:
                 pass
 
