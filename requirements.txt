@@ -2,7 +2,7 @@ Django==2.2.4
 django-bootstrap==0.2.4
 django-bootstrap4==0.0.8
 django-extensions==2.2.1
-pyspark==2.4.2
+pyspark==3.2.2
 pytz==2019.2
 six==1.12.0
 sqlparse==0.3.0
